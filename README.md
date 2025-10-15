@@ -1,6 +1,7 @@
 ## Synapse Backend Repository
 #### 시니어 디지털 격차 해소를 위한 AI 기반 음성 키오스크 애플리케이션
 
+
 ## ERD
 <img width="1920" height="1080" alt="synapse" src="https://github.com/user-attachments/assets/b56d6684-ac43-4d87-af5a-57586991c4c5" />
 
@@ -52,3 +53,12 @@
 | `test: ` | 테스트 코드 추가 | `#12 test: 주문 서비스 테스트 작성` |
 | `doc: ` | 문서 작성 및 수정 | `#5 doc: README.md 업데이트` |
 | `chore: ` | 빌드 업무 , 패키지 매니저 수정 | `#7 chore: CD 스크립트 수정` |
+
+## Developer
+
+|BE |
+| :---: |
+|<img src="https://avatars.githubusercontent.com/sanchaehwa" width="140px;" alt="sanchaehwa"/>|
+| [양화영](https://github.com/sanchaehwa) |
+
+<br/>
