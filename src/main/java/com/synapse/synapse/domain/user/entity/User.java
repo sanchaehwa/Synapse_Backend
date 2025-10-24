@@ -1,6 +1,6 @@
 package com.synapse.synapse.domain.user.entity;
 
-import com.synapse.synapse.domain.order.entity.Order;
+import com.synapse.synapse.domain.kiosk.order.entity.Order;
 import com.synapse.synapse.domain.user.model.UserType;
 import com.synapse.synapse.global.domain.BaseEntity;
 import jakarta.persistence.*;
@@ -29,6 +29,7 @@ public class User extends BaseEntity {
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private SpeechData speechData;
 
+    @Builder.Default
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
 

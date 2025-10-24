@@ -25,7 +25,7 @@ public class SpeechData extends BaseEntity {
     private User user;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="qrUser_id",unique = true)
-    private CreateQRUser createQRUser;
+    @JoinColumn(name = "qr_user_id")
+    private CreateQRUser qrUser;
 
 }

@@ -1,6 +1,6 @@
 package com.synapse.synapse.domain.user.entity;
 
-import com.synapse.synapse.domain.order.entity.Order;
+import com.synapse.synapse.domain.kiosk.order.entity.Order;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,6 +34,7 @@ public class CreateQRUser {
     @OneToOne(mappedBy = "qrUser", fetch = FetchType.LAZY, cascade =  CascadeType.ALL, orphanRemoval = true)
     private SpeechData speechData;
 
+    @Builder.Default
     @OneToMany(mappedBy = "qrUser", cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
 }

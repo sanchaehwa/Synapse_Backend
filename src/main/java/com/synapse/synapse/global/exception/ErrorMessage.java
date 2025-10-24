@@ -32,29 +32,25 @@ public enum ErrorMessage {
     INVALID_TOKEN(401, "AUTH1003", "유효하지 않은 토큰입니다."),
 
     //주문 관련
-    ORD1001(404, "ORD1001", "주문 내역을 찾을 수 없습니다."),
-    ORD1002(404, "ORD1002", "메뉴 / 상품을 찾을 수 없습니다."),
-    ORD1003(400, "ORD1003", "주문 가능 수량이 초과되었습니다."),
-    ORD1004(404, "ORD1004", "존재하지 않는 옵션 / 사이즈 입니다."),
-    ORD1005(400, "ORD1005", "하나 이상 주문해야 합니다"),
+    NOT_FOUND_ORDER(404, "ORD1001", "주문 내역을 찾을 수 없습니다."),
+    NOT_FOUND_MENU(404, "ORD1002", "메뉴 / 상품을 찾을 수 없습니다."),
+    QUANTITY_EXCEEDED(400, "ORD1003", "주문 가능 수량이 초과되었습니다."),
+    NOT_FOUND_OPTION(404, "ORD1004", "존재하지 않는 옵션 / 사이즈 입니다."),
+    MINIMUM_ORDER_REQUIRED(400, "ORD1005", "하나 이상 주문해야 합니다"),
 
     //결제 관련
-    PAY1001(400, "PAY1001", "카드 정보가 올바르지 않습니다."),
-    PAY1002(400, "PAY1002", "결제 승인이 거절되었습니다."),
-    PAY1003(404, "PAY1003", "존재하지 않는 결제수단입니다."),
-    PAY1004(400, "PAY1004", "이미 처리된 결제입니다."),
+    INVALID_CARD_INFORMATION(400, "PAY1001", "카드 정보가 올바르지 않습니다."),
+    PAYMENT_AUTHORIZATION_DECLINED(400, "PAY1002", "결제 승인이 거절되었습니다."),
+    NOT_FOUND_PAYMENT_METHOD(404, "PAY1003", "존재하지 않는 결제수단입니다."),
+    ALREADY_PROCESSED(400, "PAY1004", "이미 처리된 결제입니다."),
 
     //음성인식 관련
-    VOICE1001(400, "VOICE1001", "음성 인식 실패 / 인식 불가"),
-    VOICE3001(500, "VOICE3001", "서버 통신 실패"),
-    VOICE3002(500, "VOICE3002", "STT 엔진 오류"),
-    VOICE3003(500, "VOICE3003", "음성 처리 시간 초과"),
-    VOICE3004(503, "VOICE3004", "음성 인식 서비스 일시 중단"),
+    VOICE_RECOGNITION_FAILED(400, "VOICE1001", "음성 인식 실패 / 인식 불가"),
 
+    //메뉴 관련
+    NOT_FOUND_CONDITION_CATEGORY(404,"MENU1001","해당 조건을 찾을 수 없습니다"),
     // 서버 에러
     INTERNAL_SERVER_ERROR(500, "INT5000", "서버 내부 오류가 발생했습니다.");
-
-
 
     private final int status;    // HTTP 상태 코드
     private final String code;   // 에러 코드
