@@ -46,7 +46,7 @@ jobs:
         with:
           host: ${{ secrets.NCLOUD_SERVER_IP }}
           username: ${{ secrets.NCLOUD_USERNAME }}
-          password: ${{ secrets.NCLOUD_PASSWORD }}
+          key: ${{ secrets.NCLOUD_PEM_KEY }}
           script: |
             docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/synapse:latest
             docker stop synapse || true
