@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +29,6 @@ public class QrcodeController {
 		@RequestParam(value = "stroeName") String storeName
 	) {
 		List<FindAllQrcodeMenu> findAllQrcodeMenus = qrcodeService.getQrMenusForStore(storeName);
-		return ResponseEntity.ok(SuccessResponse.of(SuccessMessage.WK_DATA_RETRIEVED,findAllQrcodeMenus));
+		return ResponseEntity.ok(SuccessResponse.of(SuccessMessage.WK_DATA_RETRIEVED, findAllQrcodeMenus));
 	}
 }

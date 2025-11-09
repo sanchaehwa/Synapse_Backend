@@ -1,14 +1,30 @@
 package com.synapse.synapse.domain.kiosk.order.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.synapse.synapse.domain.admin.kiosk_management.menu.entity.KioskMenu;
 import com.synapse.synapse.domain.admin.kiosk_management.menu.model.PlatformType;
 import com.synapse.synapse.domain.admin.qrcode_management.entity.QrcodeMenu;
 
-import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
@@ -18,37 +34,37 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class OrderItem {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "order_id", nullable = false)
-    private Order order;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "order_id", nullable = false)
+	private Order order;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "kiosk_menu_id")
-    private KioskMenu kioskMenu;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "kiosk_menu_id")
+	private KioskMenu kioskMenu;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "qrcode_menu_id")
-    private QrcodeMenu qrcodeMenu;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "qrcode_menu_id")
+	private QrcodeMenu qrcodeMenu;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false,length = 20)
-    private PlatformType platformType;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 20)
+	private PlatformType platformType;
 
-    @Column(nullable = false)
-    private Integer quantity;
+	@Column(nullable = false)
+	private Integer quantity;
 
-    @Column(nullable = false)
-    private Integer price;
+	@Column(nullable = false)
+	private Integer price;
 
-    @Column(nullable = false, length = 500)
-    private String optionInfo;
+	@Column(nullable = false, length = 500)
+	private String optionInfo;
 
-    @Builder.Default
-    @OneToMany(mappedBy = "orderItem", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderItemOption> orderItemOptions = new ArrayList<>();
+	@Builder.Default
+	@OneToMany(mappedBy = "orderItem", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<OrderItemOption> orderItemOptions = new ArrayList<>();
 
 }

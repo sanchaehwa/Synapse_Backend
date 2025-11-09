@@ -1,6 +1,5 @@
 package com.synapse.synapse.domain.qrcode.service;
 
-
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -27,6 +26,5 @@ public class QrcodeService {
 			.map(FindAllQrcodeMenu::fromEntity)
 			.toList();
 	}
-
 
 }

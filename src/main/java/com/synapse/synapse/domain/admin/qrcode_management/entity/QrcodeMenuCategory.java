@@ -34,7 +34,7 @@ public class QrcodeMenuCategory extends BaseEntity {
 	private String categoryName;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="admin_id")
+	@JoinColumn(name = "admin_id")
 	private Admin admin;
 
 	public QrcodeMenuCategory(String categoryName, Admin admin) {
