@@ -3,6 +3,7 @@ plugins {
 	id 'org.springframework.boot' version '3.5.5'
 	id 'io.spring.dependency-management' version '1.1.7'
 	id 'jacoco'
+	id 'checkstyle'
 }
 
 group = 'com.synapse'
@@ -116,3 +117,20 @@ jacocoTestReport {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+// check style
+tasks.withType(Checkstyle) {
+	reports {
+		xml.required = true
+		html.required = true
+	}
+}
+
+checkstyleMain.source = fileTree('src/main/java')
+
+checkstyle {
+	configFile = file("checkstyle/naver-checkstyle-rules.xml")
+	configProperties = ["suppressionFile": "checkstyle/naver-checkstyle-suppressions.xml"]
+}
+
+checkstyleTest.enabled = false
