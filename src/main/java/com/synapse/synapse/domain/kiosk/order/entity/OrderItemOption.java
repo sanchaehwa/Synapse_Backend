@@ -1,6 +1,6 @@
 package com.synapse.synapse.domain.kiosk.order.entity;
 
-import com.synapse.synapse.domain.admin.kiosk_management.option.entity.OptionItem;
+import com.synapse.synapse.domain.admin.kiosk_management.option.entity.MenuOption;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -34,5 +34,5 @@ public class OrderItemOption {
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "option_item_id", nullable = false)
-	private OptionItem optionItem;
+	private MenuOption menuOption;
 }

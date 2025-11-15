@@ -1,5 +1,7 @@
 package com.synapse.synapse.domain.admin.kiosk_management.option.entity;
 
+import java.math.BigDecimal;
+
 import com.synapse.synapse.global.domain.BaseEntity;
 
 import jakarta.persistence.Column;
@@ -20,10 +22,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @Builder
-@Table(name = "option_item")
+@Table(name = "menu_option")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class OptionItem extends BaseEntity {
+public class MenuOption extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,8 +36,8 @@ public class OptionItem extends BaseEntity {
 	private OptionCategory optionCategory;
 
 	@Column(nullable = false, length = 50)
-	private String optionItemName;
+	private String optionName;
 
 	@Column(nullable = false)
-	private Integer price;
+	private BigDecimal price;
 }
