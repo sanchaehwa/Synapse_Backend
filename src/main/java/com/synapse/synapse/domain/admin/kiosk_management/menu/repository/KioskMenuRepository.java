@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.synapse.synapse.domain.admin.kiosk_management.menu.entity.Category;
 import com.synapse.synapse.domain.admin.kiosk_management.menu.entity.KioskMenu;
 
 @Repository
@@ -21,6 +20,4 @@ public interface KioskMenuRepository extends JpaRepository<KioskMenu, Long> {
 
 	boolean existsByCategoryId(Long id);
 
-	@Query("SELECT DISTINCT k.category FROM KioskMenu k WHERE k.admin.storeName = :storeName")
-	List<Category> getAllCategoriesByStoreName(@Param("storeName") String storeName);
 }

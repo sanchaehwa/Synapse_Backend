@@ -61,5 +61,5 @@ public class OptionCategory extends BaseEntity {
 
 	@Builder.Default
 	@OneToMany(mappedBy = "optionCategory", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<OptionItem> optionItems = new ArrayList<>();
+	private List<MenuOption> menuOptions = new ArrayList<>();
 }

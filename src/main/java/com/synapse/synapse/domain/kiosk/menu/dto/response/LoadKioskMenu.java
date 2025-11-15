@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public record LoadKioskMenu(
 
 	@Schema(description = "메뉴 이름", example = "치즈등갈비")
-	String MenuName,
+	String menuName,
 
 	@Schema(description = "메뉴 사진", example = "https://my-kiosk-bucket.s3.ap-northeast-2.amazonaws.com/menu/cheese-ribs.jpg")
 	String imgUrl,
