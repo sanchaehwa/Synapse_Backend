@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.synapse.synapse.domain.admin.Admin;
-import com.synapse.synapse.domain.kiosk.order.entity.Order;
 import com.synapse.synapse.global.domain.BaseEntity;
 
 import jakarta.persistence.CascadeType;
@@ -51,10 +50,5 @@ public class StoreInfo extends BaseEntity {
 	@Builder.Default
 	@OneToMany(mappedBy = "storeInfo", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<MonthlySales> monthlySales = new ArrayList<>();
-
-	//주문 (매장은 여러 주문을 가질수 있음)
-	@Builder.Default
-	@OneToMany(mappedBy = "storeInfo", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Order> orders = new ArrayList<>();
 
 }

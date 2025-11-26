@@ -29,6 +29,8 @@ public enum SuccessMessage implements ResponseMessage {
 	TOKEN_REFRESHED(HttpStatus.OK.value(), "토큰이 갱신되었습니다."),
 	SESSION_ACTIVE(HttpStatus.OK.value(), "세션이 유효합니다."),
 
+	MENU_CHOSE_SUCCESS(HttpStatus.OK.value(), "성공적으로 메뉴 선택 하셨습니다"),
+
 	ORDER_UPDATED(HttpStatus.OK.value(), "주문 정보가 수정되었습니다."),
 	ORDER_CANCELLED(HttpStatus.OK.value(), "주문이 취소되었습니다."),
 	ORDER_COMPLETED(HttpStatus.OK.value(), "주문이 완료되었습니다."),

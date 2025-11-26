@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.synapse.synapse.domain.admin.Admin;
 import com.synapse.synapse.domain.admin.kiosk_management.option.entity.OptionCategory;
+import com.synapse.synapse.domain.kiosk.order.entity.OrderItem;
 import com.synapse.synapse.global.domain.BaseEntity;
 
 import jakarta.persistence.CascadeType;
@@ -19,6 +20,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,6 +44,9 @@ public class KioskMenu extends BaseEntity {
 	@JoinColumn(name = "admin_id", nullable = false)
 	private Admin admin;
 
+	@OneToMany(mappedBy = "kioskMenu", fetch = FetchType.LAZY)
+	private List<OrderItem> orderItems = new ArrayList<>();
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
@@ -49,14 +54,19 @@ public class KioskMenu extends BaseEntity {
 	@Column(name = "menu_name", nullable = false, length = 50)
 	private String menuName;
 
+	@Column(name = "image_url", nullable = false)
+	private String imageUrl;
+
 	@Column(nullable = false)
 	private BigDecimal price;
 
 	@Column(nullable = false, length = 1000)
 	private String description;
 
-	@Column(nullable = false, length = 200)
-	private String imageUrl;
+	//수량
+	@Column(nullable = false)
+	@Min(1)
+	private Integer inventory;
 
 	@Builder.Default
 	@Column(nullable = false)
@@ -75,4 +85,11 @@ public class KioskMenu extends BaseEntity {
 	//AI 추천 프롬프트
 	@Column(length = 1000)
 	private String aiPromptForRecommendation;
+
+	public void changeInventory(Integer quantity) {
+		this.inventory = this.inventory - quantity;
+		if (this.inventory <= 0) {
+			this.isAvailable = false; //주문 불가
+		}
+	}
 }

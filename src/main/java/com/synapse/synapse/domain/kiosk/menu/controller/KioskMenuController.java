@@ -23,14 +23,14 @@ public class KioskMenuController {
 	private final LoadMenuService loadMenuService;
 
 	@GetMapping
-	public ApiTemplate<KioskMenuResponse> getMenu(
+	public ApiTemplate<KioskMenuResponse> getMenu( //menu 조회
 		@RequestParam String storeName,
 		@RequestParam Long categoryId
 	) {
 		KioskMenuResponse getMenu = loadMenuService.loadKioskMenus(storeName, categoryId);
 		return ApiTemplate.ok(SuccessMessage.WK_DATA_RETRIEVED, getMenu);
 	}
-	
+
 	@GetMapping("/options")
 	public ApiTemplate<List<DetailMenuResponse>> getOption(
 		@RequestParam Long menuId

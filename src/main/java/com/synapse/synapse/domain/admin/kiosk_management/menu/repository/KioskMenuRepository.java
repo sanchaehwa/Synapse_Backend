@@ -20,4 +20,8 @@ public interface KioskMenuRepository extends JpaRepository<KioskMenu, Long> {
 
 	boolean existsByCategoryId(Long id);
 
+	@Query("SELECT k FROM KioskMenu k WHERE k.admin.id = :storeId AND k.menuName = :menuName")
+	Optional<KioskMenu> findByStoreIdAndMenuName(@Param("storeId") Long storeId, @Param("menuName") String menuName);
 }
+
+

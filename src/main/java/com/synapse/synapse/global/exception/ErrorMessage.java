@@ -38,6 +38,7 @@ public enum ErrorMessage implements ResponseMessage {
 	QUANTITY_EXCEEDED(400, "ORD1003", "주문 가능 수량이 초과되었습니다."),
 	NOT_FOUND_OPTION(404, "ORD1004", "존재하지 않는 옵션 / 사이즈 입니다."),
 	MINIMUM_ORDER_REQUIRED(400, "ORD1005", "하나 이상 주문해야 합니다"),
+	QUANTITY_SHORTAGE(400, "ORD1006", "주문 수량이 부족합니다"),
 
 	//결제 관련
 	INVALID_CARD_INFORMATION(400, "PAY1001", "카드 정보가 올바르지 않습니다."),
