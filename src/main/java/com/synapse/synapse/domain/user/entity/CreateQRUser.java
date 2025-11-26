@@ -8,12 +8,10 @@ import com.synapse.synapse.domain.kiosk.order.entity.Order;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,10 +41,7 @@ public class CreateQRUser {
 	@Builder.Default
 	@Column(nullable = false)
 	private boolean isPhoneVerified = false;
-
-	@OneToOne(mappedBy = "qrUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private SpeechData speechData;
-
+	
 	@Builder.Default
 	@OneToMany(mappedBy = "qrUser", cascade = CascadeType.ALL)
 	private List<Order> orders = new ArrayList<>();
