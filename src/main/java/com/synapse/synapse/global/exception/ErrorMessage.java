@@ -56,7 +56,10 @@ public enum ErrorMessage implements ResponseMessage {
 	INTERNAL_SERVER_ERROR(500, "INT5000", "서버 내부 오류가 발생했습니다."),
 
 	//매장 정보 관련
-	NOT_FOUND_STORE(404, "STORE1001", "가게를 찾을 수 없습니다");
+	NOT_FOUND_STORE(404, "STORE1001", "가게를 찾을 수 없습니다"),
+
+	//QR코드 생성 관련
+	GENERATE_QR_CODE_FAILED(400, "QR1001", "QR 코드를 생성할 수 없습니다");
 
 	private final int status;    // HTTP 상태 코드
 	private final String code;   // 에러 코드

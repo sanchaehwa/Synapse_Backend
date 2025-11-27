@@ -40,7 +40,7 @@ public class Admin extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long id;  //storeId
 
 	@Builder.Default
 	@Enumerated(EnumType.STRING)
@@ -67,11 +67,11 @@ public class Admin extends BaseEntity {
 
 	@Builder.Default
 	@OneToMany(mappedBy = "admin", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<StoreInfo> stores = new ArrayList<>();
+	private List<StoreInfo> stores = new ArrayList<>(); //매장 정보
 
 	@Builder.Default
 	@OneToMany(mappedBy = "admin", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<KioskMenu> kioskMenus = new ArrayList<>();
+	private List<KioskMenu> kioskMenus = new ArrayList<>(); //메뉴
 
 	@Builder.Default
 	@OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)

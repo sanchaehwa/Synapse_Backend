@@ -53,25 +53,15 @@ public class User extends BaseEntity {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<OrderItem> orderItems = new ArrayList<>();
 
-	//복원용 - 전화번호 인증 선택사항
-	@Column(unique = true)
-	private String phoneNumber;
-
-	@Builder.Default
-	@Column
-	private boolean isPhoneVerified = false;
-
 	@Builder.Default
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Order> orders = new ArrayList<>();
 
 	@Builder
-	public User(String deviceUUID, String phoneNumber, boolean isPhoneVerified, List<Order> orders) {
+	public User(String deviceUUID, List<Order> orders) {
 		this.userType = UserType.USER;
 		this.sortUser = SortUser.QUERCODE_USER;
 		this.deviceUUID = deviceUUID;
-		this.phoneNumber = phoneNumber;
-		this.isPhoneVerified = isPhoneVerified;
 		this.orders = orders != null ? orders : new ArrayList<>(); //주문 내역이 비어 있는 경우 빈 리스트 반환
 
 	}
@@ -81,18 +71,8 @@ public class User extends BaseEntity {
 		this.orders = orders != null ? orders : new ArrayList<>();
 	}
 
-	//QrUser 생성
-	public static User createQrUser(String deviceUUID, String phoneNumber, boolean isPhoneVerified,
-		List<Order> orders) {
-		User user = new User(deviceUUID, phoneNumber, isPhoneVerified, new ArrayList<>());
-		user.userType = UserType.USER;
-		user.sortUser = SortUser.QUERCODE_USER;
-		return user;
-	}
-
-	// Normal User 생성
 	public static User createNormalUser(String deviceUUID, List<Order> orders) {
-		User user = new User(deviceUUID, null, false, new ArrayList<>());
+		User user = new User(deviceUUID, new ArrayList<>());
 		user.userType = UserType.USER;
 		user.sortUser = SortUser.NORMAL_USER;
 		return user;
