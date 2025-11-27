@@ -1,107 +1,39 @@
--- ==============================
--- 1. Admin
--- ==============================
-
-INSERT INTO admin (
-    user_type,
-    store_name,
-    store_type,
-    email,
-    password,
-    created_date,
-    last_modified_date
-) VALUES
-      ('ADMIN', '카페 1호점', 'CAFE', 'admin1@example.com', 'qwer1234!', NOW(), NOW()),
-      ('ADMIN', '카페 2호점', 'CAFE', 'admin2@example.com', 'qwer1234!', NOW(), NOW()),
-      ('ADMIN', '레스토랑 1호점', 'GENERAL_RESTAURANT', 'admin3@example.com', 'qwer1234!', NOW(), NOW()),
-      ('ADMIN', '레스토랑 2호점', 'GENERAL_RESTAURANT', 'admin4@example.com', 'qwer1234!', NOW(), NOW());
-
--- ==============================
--- 4. Option Category
--- ==============================
-INSERT INTO option_category (
-    name,
-    platform_type,
-    admin_id,
-    qrcode_menu_id,
-    kiosk_menu_id,
-    created_date,
-    last_modified_date
-) VALUES
-      ('사이즈', 'QRCODE', 1, 1, NULL, NOW(), NOW()),
-      ('사이드', 'QRCODE', 1, 1, NULL, NOW(), NOW()),
-      ('사이즈', 'QRCODE', 1, 3, NULL, NOW(), NOW()),
-      ('사이드', 'QRCODE', 1, 3, NULL, NOW(), NOW()),
-      ('드레싱', 'QRCODE', 1, 5, NULL, NOW(), NOW()),
-      ('토핑', 'QRCODE', 1, 5, NULL, NOW(), NOW()),
-      ('드레싱', 'QRCODE', 1, 7, NULL, NOW(), NOW()),
-      ('토핑', 'QRCODE', 1, 7, NULL, NOW(), NOW());
-
-
--- ==============================
--- 5. Option Item
--- ==============================
-INSERT INTO option_item (
-    option_item_name,
-    price,
-    option_category_id,
-    created_date,
-    last_modified_date
-) VALUES
-      ('Small', 0, 1, NOW(), NOW()),
-      ('Medium', 500, 1, NOW(), NOW()),
-      ('Large', 1000, 1, NOW(), NOW()),
-      ('감자튀김', 1000, 2, NOW(), NOW()),
-      ('콜라', 500, 2, NOW(), NOW()),
-      ('Small', 0, 3, NOW(), NOW()),
-      ('Medium', 500, 3, NOW(), NOW()),
-      ('Large', 1000, 3, NOW(), NOW()),
-      ('감자튀김', 1000, 4, NOW(), NOW()),
-      ('콜라', 500, 4, NOW(), NOW()),
-      ('시저드레싱', 0, 5, NOW(), NOW()),
-      ('랜치드레싱', 0, 5, NOW(), NOW()),
-      ('치킨', 1500, 6, NOW(), NOW()),
-      ('베이컨', 1200, 6, NOW(), NOW()),
-      ('올리브드레싱', 0, 7, NOW(), NOW()),
-      ('발사믹드레싱', 0, 7, NOW(), NOW()),
-      ('치즈', 800, 8, NOW(), NOW()),
-      ('견과류', 1000, 8, NOW(), NOW());
-
--- ==============================
--- 2. QRCode Menu Category
--- ==============================
-INSERT INTO qrcode_menu_category (
-    admin_id,
-    category_name,
-    created_date,
-    last_modified_date
-
-) VALUES
-      (1,'버거', NOW(), NOW()),
-      (1,'샐러드', NOW(), NOW());
-
--- ==============================
--- 3. QRCode Menu
--- ==============================
-INSERT INTO qrcode_menu (
-    menu_name,
-    menu_description,
-    img_url,
-    qr_menu_category_id,
-    admin_id,
-    menu_price,
-    created_date,
-    last_modified_date
-) VALUES
-      ('불고기버거', '달콤 짭조름한 불고기 패티', 'https://via.placeholder.com/150?text=Menu+Image', 1, 1, 7000, NOW(), NOW()),
-      ('치킨버거', '바삭한 치킨 패티', 'https://via.placeholder.com/150?text=Menu+Image', 1, 1, 7200, NOW(), NOW()),
-      ('새우버거', '탱글한 새우 패티와 신선한 야채', 'https://via.placeholder.com/150?text=Menu+Image', 1, 1, 7500, NOW(), NOW()),
-      ('베이컨버거', '짭조름한 베이컨과 치즈의 조화','https://via.placeholder.com/150?text=Menu+Image' , 1, 1, 7700, NOW(), NOW()),
-      ('시저샐러드', '신선한 시저드레싱 샐러드', 'https://via.placeholder.com/150?text=Menu+Image', 2, 1, 6500, NOW(), NOW()),
-      ('그릭샐러드', '건강한 그릭 스타일 샐러드', 'https://via.placeholder.com/150?text=Menu+Image', 2, 1, 6800, NOW(), NOW()),
-      ('과일샐러드', '달콤한 과일과 요거트 드레싱', 'https://via.placeholder.com/150?text=Menu+Image', 2, 1, 6300, NOW(), NOW()),
-      ('치킨샐러드', '단백질 가득 바삭한 치킨 샐러드', 'https://via.placeholder.com/150?text=Menu+Image', 2, 1, 6900, NOW(), NOW());
-
-SELECT * FROM admin;
-SELECT * FROM option_item;
-SELECT * FROM qrcode_menu;
+INSERT INTO category (id, created_date, last_modified_date, category_name)
+VALUES (1, NOW(), NOW(), '커피'),
+       (2, NOW(), NOW(), '차'),
+       (3, NOW(), NOW(), '한식'),
+       (4, NOW(), NOW(), '양식');
+INSERT INTO kiosk_menu
+(id, created_date, last_modified_date, description, image_url, inventory, is_available, is_deleted, menu_name, price,
+ admin_id, category_id)
+VALUES (1, NOW(), NOW(), '진한 원두로 만든 따뜻한 아메리카노', '/img/ame1.jpg', 50, 1, 0, '아메리카노', 4500, 1, 1),
+       (2, NOW(), NOW(), '부드러운 우유와 에스프레소의 조화', '/img/latte1.jpg', 40, 1, 0, '카페라떼', 5000, 1, 1);
+INSERT INTO kiosk_menu
+(id, created_date, last_modified_date, description, image_url, inventory, is_available, is_deleted, menu_name, price,
+ admin_id, category_id)
+VALUES (3, NOW(), NOW(), '은은한 산미의 아메리카노', '/img/ame2.jpg', 60, 1, 0, '아메리카노', 4300, 2, 1),
+       (4, NOW(), NOW(), '달콤한 바닐라 시럽이 들어간 라떼', '/img/vanilla2.jpg', 50, 1, 0, '바닐라라떼', 5500, 2, 1);
+INSERT INTO kiosk_menu
+(id, created_date, last_modified_date, description, image_url, inventory, is_available, is_deleted, menu_name, price,
+ admin_id, category_id)
+VALUES (5, NOW(), NOW(), '신선한 채소와 고추장을 곁들인 비빔밥', '/img/bibim3.jpg', 30, 1, 0, '비빔밥', 9000, 3, 3),
+       (6, NOW(), NOW(), '깊은 맛의 돼지고기 김치찌개', '/img/stew3.jpg', 20, 1, 0, '김치찌개', 8500, 3, 3);
+INSERT INTO kiosk_menu
+(id, created_date, last_modified_date, description, image_url, inventory, is_available, is_deleted, menu_name, price,
+ admin_id, category_id)
+VALUES (7, NOW(), NOW(), '크림이 듬뿍 들어간 까르보나라', '/img/pasta4.jpg', 25, 1, 0, '까르보나라', 12000, 4, 4),
+       (8, NOW(), NOW(), '촉촉하고 부드러운 스테이크', '/img/steak4.jpg', 15, 1, 0, '스테이크', 25000, 4, 4);
+INSERT INTO option_category
+(id, created_date, last_modified_date, name, platform_type, admin_id, kiosk_menu_id)
+VALUES (1, NOW(), NOW(), '사이즈 선택', 'KIOSK', 1, 1),
+       (2, NOW(), NOW(), '샷 추가', 'KIOSK', 2, 3),
+       (3, NOW(), NOW(), '매운맛 단계', 'KIOSK', 3, 6),
+       (4, NOW(), NOW(), '익힘 정도', 'KIOSK', 4, 8);
+INSERT INTO menu_option
+(id, created_date, last_modified_date, option_name, price, option_category_id)
+VALUES (1, NOW(), NOW(), '라지 사이즈', 1000, 1),
+       (2, NOW(), NOW(), '샷 1회 추가', 500, 2),
+       (3, NOW(), NOW(), '더 매운맛', 0, 3),
+       (4, NOW(), NOW(), '미디엄 웰던', 0, 4);
+ALTER TABLE order_item
+    MODIFY order_id BIGINT NULL;

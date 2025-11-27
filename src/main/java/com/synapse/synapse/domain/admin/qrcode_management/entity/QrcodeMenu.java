@@ -8,8 +8,22 @@ import com.synapse.synapse.domain.admin.Admin;
 import com.synapse.synapse.domain.admin.kiosk_management.option.entity.OptionCategory;
 import com.synapse.synapse.global.domain.BaseEntity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
@@ -28,10 +42,10 @@ public class QrcodeMenu extends BaseEntity {
 	@JoinColumn(name = "admin_id", nullable = false)
 	private Admin admin;
 
-	@Column(name = "menu_name",nullable = false,length = 50)
+	@Column(name = "menu_name", nullable = false, length = 50)
 	private String menuName;
 
-	@Column(name = "menu_description",nullable = false, length = 500)
+	@Column(name = "menu_description", nullable = false, length = 500)
 	private String menuDescription;
 
 	@Column(name = "img_url", nullable = false)
@@ -47,7 +61,5 @@ public class QrcodeMenu extends BaseEntity {
 	@OneToMany(mappedBy = "qrcodeMenu", cascade = CascadeType.ALL, orphanRemoval = true)
 	@Builder.Default
 	private List<OptionCategory> optionCategories = new ArrayList<>();
-
-
 
 }
