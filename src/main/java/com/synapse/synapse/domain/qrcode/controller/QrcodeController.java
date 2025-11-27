@@ -2,23 +2,25 @@ package com.synapse.synapse.domain.qrcode.controller;
 
 import java.util.List;
 
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.synapse.synapse.domain.kiosk.menu.dto.response.DetailMenuResponse;
 import com.synapse.synapse.domain.kiosk.menu.dto.response.KioskMenuResponse;
+import com.synapse.synapse.domain.kiosk.order.dto.request.OrderMenuRequest;
+import com.synapse.synapse.domain.kiosk.order.dto.request.OrderOptionRequest;
+import com.synapse.synapse.domain.kiosk.order.dto.response.CartResponse;
+import com.synapse.synapse.domain.kiosk.order.service.OrderMenuService;
 import com.synapse.synapse.domain.qrcode.service.QrcodeService;
 import com.synapse.synapse.global.api.ApiTemplate;
-import com.synapse.synapse.global.exception.ErrorMessage;
 import com.synapse.synapse.global.exception.SuccessMessage;
-import com.synapse.synapse.global.model.BadRequestException;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,9 +31,10 @@ import lombok.extern.slf4j.Slf4j;
 public class QrcodeController {
 
 	private final QrcodeService qrcodeService;
+	private final OrderMenuService orderMenuService;
 
 	//메뉴 조회
-	@GetMapping("/menu")
+	@GetMapping("/menus")
 	public ApiTemplate<KioskMenuResponse> getAllQrcodeMenus(
 		@RequestParam String storeName,
 		@RequestParam Long categoryId
@@ -50,16 +53,39 @@ public class QrcodeController {
 	}
 
 	//메뉴 선택
-
-	@PostMapping("/generate")
-	public ResponseEntity<byte[]> qrFromFile(@RequestParam("file") MultipartFile file) {
-		try {
-			byte[] qrBytes = qrcodeService.generateQrFromFile(file);
-			return ResponseEntity.ok()
-				.contentType(MediaType.IMAGE_PNG)
-				.body(qrBytes);
-		} catch (Exception e) {
-			throw new BadRequestException(ErrorMessage.GENERATE_QR_CODE_FAILED);
-		}
+	@PostMapping("/order/menu")
+	public ApiTemplate<?> choseOrderMenu(
+		@RequestParam Long storeId,
+		@Valid @RequestBody OrderMenuRequest orderMenuRequest
+	) {
+		orderMenuService.choseMenu(orderMenuRequest, storeId);
+		return ApiTemplate.ok(SuccessMessage.WK_RESOURCE_CREATED);
 	}
+
+	//옵션 선택
+	@PostMapping("/order/option")
+	public ApiTemplate<?> choseOrderOption(
+		@RequestParam Long categoryId,
+		@RequestParam String menuName,
+		@Valid @RequestBody OrderOptionRequest orderOptionRequest
+	) {
+		orderMenuService.choseOption(orderOptionRequest, categoryId, menuName);
+		return ApiTemplate.ok(SuccessMessage.WK_RESOURCE_CREATED);
+	}
+
+	//장바구니 조회
+	@GetMapping("/cart")
+	public ApiTemplate<CartResponse> getCart(@RequestParam String uuid) {
+		CartResponse cartResponse = orderMenuService.getCart(uuid);
+		return ApiTemplate.ok(SuccessMessage.WK_DATA_RETRIEVED, cartResponse);
+	}
+
+	//장바구니 삭제
+	@DeleteMapping("/cart")
+	public ApiTemplate<?> deleteCart(@RequestParam String uuid,
+		@RequestParam Long orderItemId) {
+		orderMenuService.removeMenuItem(orderItemId, uuid);
+		return ApiTemplate.ok(SuccessMessage.WK_RESOURCE_DELETED);
+	}
+
 }

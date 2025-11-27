@@ -35,4 +35,14 @@ public class OrderItemOption {
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "option_item_id", nullable = false)
 	private MenuOption menuOption;
+
+	@Builder
+	public OrderItemOption(OrderItem orderItem, MenuOption menuOption) {
+		this.orderItem = orderItem;
+		this.menuOption = menuOption;
+	}
+
+	public static OrderItemOption create(OrderItem orderItem, MenuOption menuOption) {
+		return new OrderItemOption(orderItem, menuOption);
+	}
 }

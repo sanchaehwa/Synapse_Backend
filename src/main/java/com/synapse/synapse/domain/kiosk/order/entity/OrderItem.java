@@ -61,7 +61,7 @@ public class OrderItem {
 
 	@Column(nullable = false)
 	private BigDecimal totalPrice;
-	
+
 	@OneToMany(mappedBy = "orderItem", cascade = CascadeType.ALL, orphanRemoval = true)
 	@Builder.Default
 	private List<OrderItemOption> orderItemOptions = new ArrayList<>();
@@ -85,6 +85,10 @@ public class OrderItem {
 
 	public void setOrder(Order order) {
 		this.order = order;
+	}
+
+	public void updateTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 }

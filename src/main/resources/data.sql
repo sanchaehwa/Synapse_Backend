@@ -1,98 +1,39 @@
--- ==============================
--- 1. Admin
--- ==============================
-INSERT INTO admin (user_type,
-                   store_name,
-                   store_type,
-                   email,
-                   password,
-                   created_date,
-                   last_modified_date)
-VALUES ('ADMIN', '카페 1호점', 'CAFE', 'admin1@example.com', 'qwer1234!', NOW(), NOW()),
-       ('ADMIN', '카페 2호점', 'CAFE', 'admin2@example.com', NOW(), NOW(), NOW()),
-       ('ADMIN', '레스토랑 1호점', 'GENERAL_RESTAURANT', 'admin3@example.com', 'qwer1234!', NOW(), NOW()),
-       ('ADMIN', '레스토랑 2호점', 'GENERAL_RESTAURANT', 'admin4@example.com', 'qwer1234!', NOW(), NOW());
-
--- ==============================
--- 2. Kiosk Category
--- ==============================
-INSERT INTO category (category_name,
-                      created_date,
-                      last_modified_date)
-VALUES ('버거', NOW(), NOW()),
-       ('샐러드', NOW(), NOW()),
-       ('사이드', NOW(), NOW()),
-       ('음료', NOW(), NOW()),
-       ('디저트', NOW(), NOW());
-
--- ==============================
--- 3. Kiosk Menu
--- ==============================
--- ==============================
--- ==============================
-INSERT INTO kiosk_menu (menu_name,
-                        description,
-                        price,
-                        category_id,
-                        admin_id,
-                        image_url,
-                        created_date,
-                        last_modified_date,
-                        is_available,
-                        is_deleted)
-VALUES ('불고기버거', '달콤 짭조름한 불고기 패티', 7000, 1, 1, 'https://via.placeholder.com/150?text=Bulgogi+Burger', NOW(), NOW(), 0,
-        0),
-       ('치킨버거', '바삭한 치킨 패티', 7200, 1, 1, 'https://via.placeholder.com/150?text=Chicken+Burger', NOW(), NOW(), 0, 0),
-       ('새우버거', '탱글한 새우 패티와 신선한 야채', 7500, 1, 1, 'https://via.placeholder.com/150?text=Shrimp+Burger', NOW(), NOW(), 0,
-        0),
-       ('베이컨버거', '짭조름한 베이컨과 치즈의 조화', 7700, 1, 1, 'https://via.placeholder.com/150?text=Bacon+Burger', NOW(), NOW(), 0,
-        0),
-       ('시저샐러드', '신선한 시저드레싱 샐러드', 6500, 2, 1, 'https://via.placeholder.com/150?text=Caesar+Salad', NOW(), NOW(), 0, 0),
-       ('그릭샐러드', '건강한 그릭 스타일 샐러드', 6800, 2, 1, 'https://via.placeholder.com/150?text=Greek+Salad', NOW(), NOW(), 0, 0),
-       ('과일샐러드', '달콤한 과일과 요거트 드레싱', 6300, 2, 1, 'https://via.placeholder.com/150?text=Fruit+Salad', NOW(), NOW(), 0, 0),
-       ('치킨샐러드', '단백질 가득 바삭한 치킨 샐러드', 6900, 2, 1, 'https://via.placeholder.com/150?text=Chicken+Salad', NOW(), NOW(), 0,
-        0);
--- ==============================
--- 4. Option Category
--- ==============================
-INSERT INTO option_category (name,
-                             platform_type,
-                             admin_id,
-                             kiosk_menu_id,
-                             created_date,
-                             last_modified_date)
-VALUES ('사이즈', 'KIOSK', 1, 1, NOW(), NOW()),
-       ('사이드', 'KIOSK', 1, 1, NOW(), NOW()),
-       ('사이즈', 'KIOSK', 1, 2, NOW(), NOW()),
-       ('사이드', 'KIOSK', 1, 2, NOW(), NOW()),
-       ('드레싱', 'KIOSK', 1, 5, NOW(), NOW()),
-       ('토핑', 'KIOSK', 1, 5, NOW(), NOW()),
-       ('드레싱', 'KIOSK', 1, 6, NOW(), NOW()),
-       ('토핑', 'KIOSK', 1, 6, NOW(), NOW());
-
--- ==============================
--- 5. Option Item
--- ==============================
-INSERT INTO menu_option (option_name,
-                         price,
-                         option_category_id,
-                         created_date,
-                         last_modified_date)
-VALUES ('Small', 0, 1, NOW(), NOW()),
-       ('Medium', 500, 1, NOW(), NOW()),
-       ('Large', 1000, 1, NOW(), NOW()),
-       ('감자튀김', 1000, 2, NOW(), NOW()),
-       ('콜라', 500, 2, NOW(), NOW()),
-       ('Small', 0, 3, NOW(), NOW()),
-       ('Medium', 500, 3, NOW(), NOW()),
-       ('Large', 1000, 3, NOW(), NOW()),
-       ('감자튀김', 1000, 4, NOW(), NOW()),
-       ('콜라', 500, 4, NOW(), NOW()),
-       ('시저드레싱', 0, 5, NOW(), NOW()),
-       ('랜치드레싱', 0, 5, NOW(), NOW()),
-       ('치킨', 1500, 6, NOW(), NOW()),
-       ('베이컨', 1200, 6, NOW(), NOW())
-
-
-
-
+INSERT INTO category (id, created_date, last_modified_date, category_name)
+VALUES (1, NOW(), NOW(), '커피'),
+       (2, NOW(), NOW(), '차'),
+       (3, NOW(), NOW(), '한식'),
+       (4, NOW(), NOW(), '양식');
+INSERT INTO kiosk_menu
+(id, created_date, last_modified_date, description, image_url, inventory, is_available, is_deleted, menu_name, price,
+ admin_id, category_id)
+VALUES (1, NOW(), NOW(), '진한 원두로 만든 따뜻한 아메리카노', '/img/ame1.jpg', 50, 1, 0, '아메리카노', 4500, 1, 1),
+       (2, NOW(), NOW(), '부드러운 우유와 에스프레소의 조화', '/img/latte1.jpg', 40, 1, 0, '카페라떼', 5000, 1, 1);
+INSERT INTO kiosk_menu
+(id, created_date, last_modified_date, description, image_url, inventory, is_available, is_deleted, menu_name, price,
+ admin_id, category_id)
+VALUES (3, NOW(), NOW(), '은은한 산미의 아메리카노', '/img/ame2.jpg', 60, 1, 0, '아메리카노', 4300, 2, 1),
+       (4, NOW(), NOW(), '달콤한 바닐라 시럽이 들어간 라떼', '/img/vanilla2.jpg', 50, 1, 0, '바닐라라떼', 5500, 2, 1);
+INSERT INTO kiosk_menu
+(id, created_date, last_modified_date, description, image_url, inventory, is_available, is_deleted, menu_name, price,
+ admin_id, category_id)
+VALUES (5, NOW(), NOW(), '신선한 채소와 고추장을 곁들인 비빔밥', '/img/bibim3.jpg', 30, 1, 0, '비빔밥', 9000, 3, 3),
+       (6, NOW(), NOW(), '깊은 맛의 돼지고기 김치찌개', '/img/stew3.jpg', 20, 1, 0, '김치찌개', 8500, 3, 3);
+INSERT INTO kiosk_menu
+(id, created_date, last_modified_date, description, image_url, inventory, is_available, is_deleted, menu_name, price,
+ admin_id, category_id)
+VALUES (7, NOW(), NOW(), '크림이 듬뿍 들어간 까르보나라', '/img/pasta4.jpg', 25, 1, 0, '까르보나라', 12000, 4, 4),
+       (8, NOW(), NOW(), '촉촉하고 부드러운 스테이크', '/img/steak4.jpg', 15, 1, 0, '스테이크', 25000, 4, 4);
+INSERT INTO option_category
+(id, created_date, last_modified_date, name, platform_type, admin_id, kiosk_menu_id)
+VALUES (1, NOW(), NOW(), '사이즈 선택', 'KIOSK', 1, 1),
+       (2, NOW(), NOW(), '샷 추가', 'KIOSK', 2, 3),
+       (3, NOW(), NOW(), '매운맛 단계', 'KIOSK', 3, 6),
+       (4, NOW(), NOW(), '익힘 정도', 'KIOSK', 4, 8);
+INSERT INTO menu_option
+(id, created_date, last_modified_date, option_name, price, option_category_id)
+VALUES (1, NOW(), NOW(), '라지 사이즈', 1000, 1),
+       (2, NOW(), NOW(), '샷 1회 추가', 500, 2),
+       (3, NOW(), NOW(), '더 매운맛', 0, 3),
+       (4, NOW(), NOW(), '미디엄 웰던', 0, 4);
+ALTER TABLE order_item
+    MODIFY order_id BIGINT NULL;

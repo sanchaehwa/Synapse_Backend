@@ -30,7 +30,5 @@ public class OrderController {
 		orderMenuService.choseMenu(orderMenuRequest, storeId);
 		return ApiTemplate.ok(SuccessMessage.MENU_CHOSE_SUCCESS);
 	}
-
-	//
-
+	
 }
