@@ -2,8 +2,10 @@ package com.synapse.synapse.domain.qrcode.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,7 @@ import com.synapse.synapse.domain.kiosk.order.dto.request.OrderMenuRequest;
 import com.synapse.synapse.domain.kiosk.order.dto.request.OrderOptionRequest;
 import com.synapse.synapse.domain.kiosk.order.dto.response.CartResponse;
 import com.synapse.synapse.domain.kiosk.order.service.OrderMenuService;
+import com.synapse.synapse.domain.qrcode.dto.response.QrcodeResponse;
 import com.synapse.synapse.domain.qrcode.service.QrcodeService;
 import com.synapse.synapse.global.api.ApiTemplate;
 import com.synapse.synapse.global.exception.SuccessMessage;
@@ -86,6 +89,13 @@ public class QrcodeController {
 		@RequestParam Long orderItemId) {
 		orderMenuService.removeMenuItem(orderItemId, uuid);
 		return ApiTemplate.ok(SuccessMessage.WK_RESOURCE_DELETED);
+	}
+
+	//qrcode 생성
+	@GetMapping("/{uuid}")
+	public ResponseEntity<QrcodeResponse> createOrderQr(@PathVariable String uuid) {
+		QrcodeResponse response = qrcodeService.createTxtAndQRCode(uuid);
+		return ResponseEntity.ok(response);
 	}
 
 }
