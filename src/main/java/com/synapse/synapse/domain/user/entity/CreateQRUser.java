@@ -1,11 +1,22 @@
 package com.synapse.synapse.domain.user.entity;
 
-import com.synapse.synapse.domain.kiosk.order.entity.Order;
-import jakarta.persistence.*;
-import lombok.*;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.synapse.synapse.domain.kiosk.order.entity.Order;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
@@ -15,26 +26,23 @@ import java.util.List;
 @AllArgsConstructor
 public class CreateQRUser {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    //QR 생성 App 설치시 자동 생성되는 UUID
-    @Column(unique = true, nullable = false)
-    private String deviceUUID;
+	//QR 생성 App 설치시 자동 생성되는 UUID
+	@Column(unique = true, nullable = false)
+	private String deviceUUID;
 
-    //복원용 - 전화번호 인증 선택사항
-    @Column(unique = true)
-    private String phoneNumber;
+	//복원용 - 전화번호 인증 선택사항
+	@Column(unique = true)
+	private String phoneNumber;
 
-    @Builder.Default
-    @Column(nullable = false)
-    private boolean isPhoneVerified = false;
-
-    @OneToOne(mappedBy = "qrUser", fetch = FetchType.LAZY, cascade =  CascadeType.ALL, orphanRemoval = true)
-    private SpeechData speechData;
-
-    @Builder.Default
-    @OneToMany(mappedBy = "qrUser", cascade = CascadeType.ALL)
-    private List<Order> orders = new ArrayList<>();
+	@Builder.Default
+	@Column(nullable = false)
+	private boolean isPhoneVerified = false;
+	
+	@Builder.Default
+	@OneToMany(mappedBy = "qrUser", cascade = CascadeType.ALL)
+	private List<Order> orders = new ArrayList<>();
 }

@@ -4,10 +4,13 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.synapse.synapse.domain.admin.kiosk_management.option.entity.OptionCategory;
 import com.synapse.synapse.domain.admin.qrcode_management.entity.QrcodeMenu;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -31,7 +34,7 @@ public class FindAllQrcodeMenu {
 			.imgUrl(qrcodeMenu.getImgUrl())
 			.optionCategories(
 				qrcodeMenu.getOptionCategories().stream()
-					.map(OptionCategoryResponse :: fromEntity)
+					.map(OptionCategoryResponse::fromEntity)
 					.collect(Collectors.toList())
 			)
 			.build();

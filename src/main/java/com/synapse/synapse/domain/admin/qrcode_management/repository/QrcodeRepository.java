@@ -8,20 +8,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.synapse.synapse.domain.admin.kiosk_management.menu.model.PlatformType;
 import com.synapse.synapse.domain.admin.qrcode_management.entity.QrcodeMenu;
-import com.synapse.synapse.domain.qrcode.dto.response.FindAllQrcodeMenu;
 
 import lombok.RequiredArgsConstructor;
 
 @Repository
 @RequiredArgsConstructor
-public class QrcodeRepository{
+public class QrcodeRepository {
 
 	private final JPAQueryFactory queryFactory;
-
 
 	//Projections 적용 안한 경우
 	public List<QrcodeMenu> findQrMenusByStoreName(String storeName) {
